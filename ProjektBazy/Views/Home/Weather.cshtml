@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Pogoda";
+}
+
+<h1>Sprawdź pogodę</h1>
+
+<div>
+    <input type="text" id="cityInput" placeholder="Wpisz nazwę miasta" />
+    <button onclick="getWeather()">Sprawdź pogodę</button>
+</div>
+
+<div id="weatherResult" style="margin-top: 20px;">
+    <!-- Tutaj zostaną wyświetlone dane pogodowe -->
+</div>
+
+<script>
+    async function getWeather() {
+        const city = document.getElementById('cityInput').value;
+        if (!city) {
+            alert("Proszę wpisać nazwę miasta.");
+            return;
+        }
+
+        const response = await fetch(`/api/weather/${city}`);
+        if (response.ok) {
+            const data = await response.json();
+            displayWeather(data);
+        } else {
+            const error = await response.text();
+            alert(`Błąd: ${error}`);
+        }
+    }
+
+    function displayWeather(data) {
+        const weatherResult = document.getElementById('weatherResult');
+        weatherResult.innerHTML = `
+            <h2>Pogoda w ${data.city}</h2>
+            <p><strong>Temperatura:</strong> ${data.temperature} °C</p>
+            <p><strong>Wilgotność:</strong> ${data.humidity}%</p>
+            <p><strong>Opis:</strong> ${data.weatherDescription}</p>
+        `;
+    }
+</script>
