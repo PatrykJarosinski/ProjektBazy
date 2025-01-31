@@ -4,54 +4,111 @@
     ViewData["Title"] = "Produkty";
 }
 
-<h1>Produkty</h1>
+<div class="container">
+    <h1 class="mt-4 mb-4 text-center text-primary">Produkty</h1>
 
-@if (User.IsInRole("admin"))
-{
-    <p>
-        <a asp-action="Create">Dodaj nowy produkt</a>
-    </p>
-}
+    @if (User.IsInRole("admin"))
+    {
+        <div class="text-center mb-4">
+            <a asp-action="Create" class="btn btn-primary btn-lg">
+                <i class="fas fa-plus-circle"></i> Dodaj nowy produkt
+            </a>
+        </div>
+    }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreatedDate)
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id">Szczegóły</a>
-                    @if (User.IsInRole("admin"))
-                    {
-                        <span>|</span>
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>
-                        <span>|</span>
-                        <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
-                    }
-                </td>
-            </tr>
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h5 class="card-title mb-0">Lista produktów</h5>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-hover table-borderless">
+                    <thead class="bg-light">
+                        <tr>
+                            <th scope="col">@Html.DisplayNameFor(model => model.Name)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => model.Price)</th>
+                            <th scope="col">@Html.DisplayNameFor(model => model.CreatedDate)</th>
+                            <th scope="col" class="text-center">Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="align-middle">
+                                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Price)</td>
+                                <td>@Html.DisplayFor(modelItem => item.CreatedDate)</td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
+                                            <i class="fas fa-info-circle"></i> Szczegóły
+                                        </a>
+                                        @if (User.IsInRole("admin"))
+                                        {
+                                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning btn-sm">
+                                                <i class="fas fa-edit"></i> Edytuj
+                                            </a>
+                                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger btn-sm">
+                                                <i class="fas fa-trash-alt"></i> Usuń
+                                            </a>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        border-radius: 15px 15px 0 0;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+        transform: scale(1.02);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .btn-outline-info, .btn-outline-warning, .btn-outline-danger {
+        border-radius: 20px;
+        margin: 2px;
+    }
+
+        .btn-outline-info:hover, .btn-outline-warning:hover, .btn-outline-danger:hover {
+            color: white;
         }
-    </tbody>
-</table>
+
+        .btn-outline-info:hover {
+            background-color: #17a2b8;
+        }
+
+        .btn-outline-warning:hover {
+            background-color: #ffc107;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #dc3545;
+        }
+
+    h1 {
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />

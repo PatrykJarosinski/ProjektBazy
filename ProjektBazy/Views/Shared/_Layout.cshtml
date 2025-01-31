@@ -7,12 +7,65 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProjektBazy.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 20px 0;
+        }
+
+        .nav-link {
+            color: #343a40 !important;
+            font-weight: 500;
+        }
+
+            .nav-link:hover {
+                color: #007bff !important;
+            }
+
+        .btn-link {
+            color: #343a40;
+            text-decoration: none;
+        }
+
+            .btn-link:hover {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: #007bff !important;
+        }
+
+        .container {
+            padding-top: 20px;
+        }
+
+        h1 {
+            font-weight: bold;
+            color: #343a40;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index">ProjektBazy</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Products" asp-action="Index">
+                    <i class="fas fa-database"></i> ProjektBazy
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,31 +73,43 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Produkty</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">
+                                <i class="fas fa-box-open"></i> Produkty
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Weather">Pogoda</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Weather">
+                                <i class="fas fa-cloud-sun"></i> Pogoda
+                            </a>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <span class="nav-link text-dark">Witaj, @User.Identity.Name!</span>
+                                <span class="nav-link text-dark">
+                                    <i class="fas fa-user"></i> Witaj, @User.Identity.Name!
+                                </span>
                             </li>
                             <li class="nav-item">
                                 <form class="form-inline" asp-area="" asp-controller="Account" asp-action="Logout" method="post">
-                                    <button type="submit" class="nav-link btn btn-link text-dark">Wyloguj</button>
+                                    <button type="submit" class="nav-link btn btn-link text-dark">
+                                        <i class="fas fa-sign-out-alt"></i> Wyloguj
+                                    </button>
                                 </form>
                             </li>
                         }
                         else
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Zaloguj</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">
+                                    <i class="fas fa-sign-in-alt"></i> Zaloguj
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Zarejestruj</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">
+                                    <i class="fas fa-user-plus"></i> Zarejestruj
+                                </a>
                             </li>
                         }
                     </ul>
@@ -59,8 +124,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - ProjektBazy - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container text-center">
+            &copy; 2025 - ProjektBazy - <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-light">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
